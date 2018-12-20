@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4d91ff</color>
+    <color name="colorPrimaryDark">#0064cb</color>
+    <color name="colorAccent">#8ac1ff</color>
+
+
+    <!-- COLORI ICONE -->
+    <color name="colorBlack">#000</color>
+    <color name="colorDarkOrange">#E05D56</color>
+    <color name="colorLightOrange">#E0A256</color>
+    <color name="l_gray_color_icon">#bdbdbd</color>
+    <color name="d_gray_color_icon">#777777</color>
+</resources>
