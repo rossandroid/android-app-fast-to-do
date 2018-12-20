@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         Todo todo2 = new Todo("Prova2", "descr", true);
         Todo todo3 = new Todo("Prova3", "descr", false);
 
+        // bla bla bla
 
     }
 
