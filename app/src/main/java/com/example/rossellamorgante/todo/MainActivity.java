@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.example.rossellamorgante.todo.Model.Todo;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,8 +23,14 @@ public class MainActivity extends AppCompatActivity {
         Todo todo2 = new Todo("Prova2", "descr", true);
         Todo todo3 = new Todo("Prova3", "descr", false);
 
-        // bla bla bla
-        //bla bla 2
+        ArrayList<Todo> lista = new ArrayList<Todo>();
+        lista.add(todo1);
+        lista.add(todo2);
+        lista.add(todo3);
+
+        AdapterToDoList adapter = new AdapterToDoList(this,lista);
+        ((ListView)findViewById(R.id.lista_todo_main)).setAdapter(adapter);
+
 
     }
 

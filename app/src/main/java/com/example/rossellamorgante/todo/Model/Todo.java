@@ -14,14 +14,14 @@ public class Todo {
 
     @NonNull
     @ColumnInfo(name = "titolo")
-    String titolo;
+    public String titolo;
 
     @ColumnInfo(name = "descr")
-    String descr;
+    public String descr;
 
     @NonNull
     @ColumnInfo(name = "stato")
-    boolean stato;
+    public boolean stato;
 
     public Todo(String t, String d, boolean s) {
         this.titolo = t;
