@@ -1,6 +1,7 @@
 package com.example.rossellamorgante.todo;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,13 @@ public class AdapterToDoList extends ArrayAdapter<Todo> {
             listItem = LayoutInflater.from(mContext).inflate(R.layout.item,parent,false);
 
         Todo t = todoList.get(position);
-
-        ((TextView)listItem.findViewById(R.id.titolo)).setText(t.titolo);
-        ((TextView)listItem.findViewById(R.id.sottotitolo)).setText(t.descr);
+        TextView titolo = ((TextView)listItem.findViewById(R.id.titolo));
+        TextView descr  =  ((TextView)listItem.findViewById(R.id.sottotitolo));
+        if(t.stato){
+            titolo.setPaintFlags(titolo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
+        titolo.setText(t.titolo);
+        descr.setText(t.descr);
 
 
 

@@ -1,12 +1,15 @@
 package com.example.rossellamorgante.todo;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.example.rossellamorgante.todo.Model.AppDatabase;
 import com.example.rossellamorgante.todo.Model.Todo;
 
 import java.util.ArrayList;
@@ -14,22 +17,30 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    ArrayList<Todo> lista = new ArrayList<Todo>();
+    AppDatabase db;
+    AdapterToDoList adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = AppDatabase.getInstance(this);
 
-        Todo todo1 = new Todo("Prova1", "descr", false);
-        Todo todo2 = new Todo("Prova2", "descr", true);
-        Todo todo3 = new Todo("Prova3", "descr", false);
+        lista = (ArrayList<Todo>) db.todoDao().dammiTutto();
 
-        ArrayList<Todo> lista = new ArrayList<Todo>();
-        lista.add(todo1);
-        lista.add(todo2);
-        lista.add(todo3);
-
-        AdapterToDoList adapter = new AdapterToDoList(this,lista);
+        adapter = new AdapterToDoList(this,lista);
         ((ListView)findViewById(R.id.lista_todo_main)).setAdapter(adapter);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        lista.clear();
+        lista.addAll (db.todoDao().dammiTutto());
+        adapter.notifyDataSetChanged();
 
 
     }
@@ -45,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_item:
-                onBackPressed();
+
+                Intent myIntent = new Intent(this, AddTodo.class);
+                startActivity(myIntent);
+
                 break;
             default:
                 break;
