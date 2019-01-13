@@ -9,5 +9,15 @@
             android:icon="@drawable/ic_add_black_24dp"
             android:title="Aggiungi"
             app:showAsAction="always"/>
+        <item
+            android:id="@+id/delete_timeout"
+            android:title="Delete Timeout"
+            app:showAsAction="collapseActionView"/>
+
+        <item
+            android:id="@+id/delete_completed"
+            android:title="Delete Completed"
+            app:showAsAction="collapseActionView"/>
+
 
 </menu>

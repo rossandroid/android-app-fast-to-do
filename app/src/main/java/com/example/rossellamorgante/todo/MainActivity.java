@@ -22,6 +22,7 @@ import com.example.rossellamorgante.todo.Model.Todo;
 import com.example.rossellamorgante.todo.alarm.AlarmReceiver;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,48 +48,46 @@ public class MainActivity extends AppCompatActivity {
                 pickItemList(position);
             }
         });
-
+        try{
+            Todo t= (Todo)getIntent().getSerializableExtra("notifity_todo");
+            showOptions(t);
+        }catch (Exception e){}
     }
 
-    private void pickItemList (final int position){
-
+    private void showOptions(final Todo t){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getResources().getString(R.string.t_pick_list_item));
+        builder.setTitle(t.titolo.toUpperCase());
         String[] list_option = {"","Edit..."};
-        list_option[0]=(lista.get(position).stato)?"Not completed":"Completed";
-
+        list_option[0]=(t.stato)?"Not completed":"Completed";
         builder.setItems(list_option, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-            Todo t = lista.get(position);
-
-
                 switch (which){
-                case 0:
-                    t.stato=!t.stato;
-                    db.todoDao().update(t);
-                    updateLista();
-                    if(t.stato) {
-                        AlarmReceiver.removeAlarm(getApplicationContext(),(int)t.id,true);
-                    }else {
-
-                        AlarmReceiver.setAlarm(getApplicationContext(),(int)t.id,(t.reminder-t.data),true);
-                    }
-                    break;
-                case 1:
-                    Intent myIntent = new Intent(getApplicationContext(), AddTodo.class);
-                    myIntent.putExtra("todo", t);
-                    startActivity(myIntent);
-                    break;
-            }
-
+                    case 0:
+                        t.stato=!t.stato;
+                        db.todoDao().update(t);
+                        updateLista();
+                        if(t.stato) {
+                            AlarmReceiver.removeAlarm(getApplicationContext(),(int)t.id,true);
+                        }else {
+                            AlarmReceiver.setAlarm(getApplicationContext(),(int)t.id,(t.reminder-t.data),true);
+                        }
+                        break;
+                    case 1:
+                        Intent myIntent = new Intent(getApplicationContext(), AddTodo.class);
+                        myIntent.putExtra("todo", t);
+                        startActivity(myIntent);
+                        break;
+                }
             }
         });
-
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
+    private void pickItemList (final int position){
+        showOptions(lista.get(position));
+    }
 
     private void updateLista(){
         lista.clear();
@@ -114,6 +113,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.add_item:
                 Intent myIntent = new Intent(this, AddTodo.class);
                 startActivity(myIntent);
+                break;
+            case R.id.delete_timeout:
+                db.todoDao().deleteTimeout(new Date().getTime());
+                updateLista();
+                break;
+            case R.id.delete_completed:
+                db.todoDao().deleteCompleted();
+                updateLista();
                 break;
             default:
                 break;

@@ -21,29 +21,28 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="0"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/t_value"
-                android:layout_width="50dp"
+            <ImageView
+                android:id="@+id/i_clock"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="15"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                app:srcCompat="@drawable/ic_timer_black_24dp" />
 
             <TextView
                 android:id="@+id/t_m_h"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="minutes"
+                android:text="timeout"
                 android:textAlignment="center"
+                android:textSize="12sp"
                 android:textStyle="italic" />
+
         </LinearLayout>
 
         <LinearLayout

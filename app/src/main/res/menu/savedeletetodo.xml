@@ -4,7 +4,9 @@
     <item
         android:id="@+id/save_item"
         android:title="Update"
-        app:showAsAction="collapseActionView"/>
+        app:showAsAction="always"
+        android:icon="@drawable/ic_done_black_24dp"
+        />
 
     <item
         android:id="@+id/savedelete_item"

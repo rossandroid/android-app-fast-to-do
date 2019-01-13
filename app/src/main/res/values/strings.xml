@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Todo</string>
-    <string name="h_titolo">hint titolo</string>
-    <string name="h_descrizione">h descrizione</string>
+    <string name="h_titolo">Title</string>
+    <string name="h_descrizione">Note</string>
     <string name="b_categoria">S categoria</string>
     <string name="t_pick_categoria">Select Categoria</string>
     <string name="t_pick_list_item">Choose option</string>
     <string name="error_mandatory">Mandatory Field</string>
+    <string name="reminder_after">Remind me after </string>
+    <string name="minutes"> minutes</string>
+    <string name="category">Category</string>
 </resources>

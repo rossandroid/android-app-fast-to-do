@@ -3,6 +3,7 @@ package com.example.rossellamorgante.todo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,7 +37,6 @@ public class AddTodo extends AppCompatActivity {
     SeekBar seekBar ;
     int index_seek=0;
     final int [] timeing={2,5,10,15,30,45,60};
-    final String min_hour= "minutes";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,8 @@ public class AddTodo extends AppCompatActivity {
         ((Button)findViewById(R.id.b_categoria)).setText(categorie[0]);
         ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[0]));
         seekBar = (SeekBar)findViewById(R.id.timeBar);
+        ((TextView)findViewById(R.id.labelCategoria)).setText(getResources().getString(R.string.category));
+
 
         try{
             t= (Todo)getIntent().getSerializableExtra("todo");
@@ -76,7 +78,7 @@ public class AddTodo extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 index_seek=progress;
-                ((TextView)findViewById(R.id.labeltime)).setText("Remind me after "+timeing[progress]+" "+min_hour);
+                ((TextView)findViewById(R.id.labeltime)).setText(getResources().getString(R.string.reminder_after)+timeing[progress]+getResources().getString(R.string.minutes));
             }
         });
 

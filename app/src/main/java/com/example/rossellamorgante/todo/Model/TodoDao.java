@@ -25,7 +25,13 @@ public interface TodoDao {
     @Delete
     void remove(Todo t);
 
-    @Query("SELECT * FROM Todo WHERE :id=id LIMIT 1")
+    @Query("SELECT * FROM Todo WHERE id=:id LIMIT 1")
     Todo getTodo(int id);
+
+    @Query ("DELETE FROM Todo WHERE stato=1")
+    void deleteCompleted();
+
+    @Query ("DELETE FROM Todo WHERE (reminder-:timer)<=0")
+    void deleteTimeout(long timer);
 }
 

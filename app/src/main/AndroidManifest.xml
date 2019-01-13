@@ -23,7 +23,6 @@
         </receiver>
 
         <activity android:name=".MainActivity"
-            android:taskAffinity=""
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +30,9 @@
 
             </intent-filter>
         </activity>
-        <activity android:name=".AddTodo"></activity>
+        <activity android:name=".AddTodo"
+            android:taskAffinity=""
+            ></activity>
     </application>
 
 
