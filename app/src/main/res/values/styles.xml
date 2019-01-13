@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -17,8 +17,14 @@
     </style>
 
     <style name="SottoTitolo" parent="">
-        <item name="android:textColor">@color/colorDarkOrange</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="data" parent="">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textStyle">italic</item>
     </style>
 
 </resources>

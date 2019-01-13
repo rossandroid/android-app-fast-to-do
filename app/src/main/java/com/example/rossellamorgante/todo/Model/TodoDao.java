@@ -4,17 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 @Dao
 public interface TodoDao {
 
-    @Query("SELECT * FROM Todo")
-    List<Todo> dammiTutto();
+    @Query("SELECT * FROM Todo ORDER BY data DESC")
+    List<Todo> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Todo doto);
+    long insert(Todo doto);
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    void update(Todo t);
+
+    @Delete
+    void remove(Todo t);
+
+    @Query("SELECT * FROM Todo WHERE :id=id LIMIT 1")
+    Todo getTodo(int id);
 }
 

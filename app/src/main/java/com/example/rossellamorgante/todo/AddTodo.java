@@ -1,31 +1,84 @@
 package com.example.rossellamorgante.todo;
 
-import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.rossellamorgante.todo.Model.AppDatabase;
 import com.example.rossellamorgante.todo.Model.Todo;
+import com.example.rossellamorgante.todo.alarm.AlarmReceiver;
+import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.ArrayList;
+
+import java.util.Arrays;
+import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import static android.graphics.Color.parseColor;
 
 public class AddTodo extends AppCompatActivity {
 
     AppDatabase db;
+    String[] categorie ;
+    String[] colors;
+    Todo t=null;
+    boolean isNew=true;
+    SeekBar seekBar ;
+    int index_seek=0;
+    final int [] timeing={2,5,10,15,30,45,60};
+    final String min_hour= "minutes";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_todo);
-
-        ArrayList<Todo> lista = new ArrayList<Todo>();
         db = AppDatabase.getInstance(this);
+        categorie = getResources().getStringArray(R.array.array_categorie);
+        colors = getResources().getStringArray(R.array.array_color_categorie);
 
+        ((Button)findViewById(R.id.b_categoria)).setText(categorie[0]);
+        ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[0]));
+        seekBar = (SeekBar)findViewById(R.id.timeBar);
+
+        try{
+            t= (Todo)getIntent().getSerializableExtra("todo");
+            ((TextInputEditText)findViewById(R.id.t_titolo)).setText(t.titolo);
+            ((TextInputEditText)findViewById(R.id.t_descrizione)).setText(t.descr);
+            ((Button)findViewById(R.id.b_categoria)).setText(t.categoria);
+            ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[Arrays.asList(categorie).indexOf(t.categoria)]));
+            ((Switch) findViewById(R.id.switch_c)).setChecked(t.stato);
+            isNew=false;
+        }catch (Exception e){
+             t  = new Todo();
+            ((Switch) findViewById(R.id.switch_c)).setVisibility(View.GONE);
+        }
+
+
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                index_seek=progress;
+                ((TextView)findViewById(R.id.labeltime)).setText("Remind me after "+timeing[progress]+" "+min_hour);
+            }
+        });
 
     }
 
@@ -33,7 +86,10 @@ public class AddTodo extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.savetodo, menu);
+        if(isNew)
+            inflater.inflate(R.menu.savetodo, menu);
+        else
+            inflater.inflate(R.menu.savedeletetodo, menu);
         return true;
     }
 
@@ -43,6 +99,10 @@ public class AddTodo extends AppCompatActivity {
             case R.id.save_item:
                 saveTodo();
                 break;
+            case R.id.savedelete_item:
+                db.todoDao().remove(t);
+                onBackPressed();
+                break;
             default:
                 break;
         }
@@ -51,11 +111,53 @@ public class AddTodo extends AppCompatActivity {
 
 
     private void saveTodo(){
-        String titolo = ((EditText)findViewById(R.id.titolo)).getText().toString();
-        String sottotitolo = ((EditText)findViewById(R.id.descrizione)).getText().toString();
-        Todo t  = new Todo(titolo,sottotitolo,false);
-        db.todoDao().insert(t);
+
+        if(((TextInputEditText)findViewById(R.id.t_titolo)).getText().toString().length()==0) {
+            ((TextInputEditText) findViewById(R.id.t_titolo)).setError(getString(R.string.error_mandatory));
+            return;
+        }
+        if(((TextInputEditText)findViewById(R.id.t_descrizione)).getText().toString().length()==0) {
+            ((TextInputEditText) findViewById(R.id.t_descrizione)).setError(getString(R.string.error_mandatory));
+            return;
+        }
+
+        t.titolo = ((TextInputEditText)findViewById(R.id.t_titolo)).getText().toString();
+        t.descr = ((TextInputEditText)findViewById(R.id.t_descrizione)).getText().toString();
+        t.categoria =  ((Button)findViewById(R.id.b_categoria)).getText().toString();
+        t.stato = ((Switch) findViewById(R.id.switch_c)).isChecked();
+        t.data = new Date().getTime();
+
+        long millsec_more=timeing[index_seek]*1000*60;
+        t.reminder = t.data + millsec_more;
+
+        if (isNew == true) {
+            long id = db.todoDao().insert(t);
+            AlarmReceiver.setAlarm(this,(int)id,t.reminder,true);
+        } else {
+            db.todoDao().update(t);
+            AlarmReceiver.removeAlarm(this,(int)t.id,false);
+            AlarmReceiver.setAlarm(this,(int)t.id,t.reminder,true);
+        }
+
         onBackPressed();
 
+    }
+
+    public void pickCategoria (View v){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getResources().getString(R.string.t_pick_categoria));
+        categorie = getResources().getStringArray(R.array.array_categorie);
+        colors = getResources().getStringArray(R.array.array_color_categorie);
+        builder.setItems(categorie, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ((Button)findViewById(R.id.b_categoria)).setText(categorie[which]);
+                ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[which]));
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

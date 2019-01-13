@@ -6,9 +6,13 @@
 
 
     <!-- COLORI ICONE -->
-    <color name="colorBlack">#000</color>
-    <color name="colorDarkOrange">#E05D56</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorDarkOrange">#e05d56</color>
     <color name="colorLightOrange">#E0A256</color>
     <color name="l_gray_color_icon">#bdbdbd</color>
     <color name="d_gray_color_icon">#777777</color>
+
+    <color name="l_gray_caaolor_icon">#FFFF0000</color>
+
+
 </resources>

@@ -1,5 +1,7 @@
 package com.example.rossellamorgante.todo.Model;
 
+import java.io.Serializable;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -7,7 +9,7 @@ import androidx.room.PrimaryKey;
 
 
 @Entity()
-public class Todo {
+public class Todo implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -23,10 +25,25 @@ public class Todo {
     @ColumnInfo(name = "stato")
     public boolean stato;
 
-    public Todo(String t, String d, boolean s) {
-        this.titolo = t;
-        this.descr = d;
-        this.stato = s;
+    @NonNull
+    @ColumnInfo(name = "categoria")
+    public String categoria;
+
+    @NonNull
+    @ColumnInfo(name = "data")
+    public long data;
+
+    @NonNull
+    @ColumnInfo(name = "reminder")
+    public long reminder;
+
+    public Todo(String t, String d, boolean s, String c, long data, long reminder) {
+        this.titolo = t; //title
+        this.descr = d; // subtitle
+        this.stato = s; // completed or not
+        this.categoria = c; // category
+        this.data=data; // timestamp
+        this.reminder=reminder; //millisec
     }
     public Todo(){}
 

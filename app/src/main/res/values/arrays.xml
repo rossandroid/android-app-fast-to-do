@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="array_categorie">
+        <item>Work</item>
+        <item>Family</item>
+        <item>Shopping</item>
+        <item>Sport</item>
+    </string-array>
+
+    <string-array name="array_color_categorie">
+        <item>#9a0007</item>
+        <item>#303f9f</item>
+        <item>#00600f</item>
+        <item>#bb4d00</item>
+    </string-array>
+
+</resources>
