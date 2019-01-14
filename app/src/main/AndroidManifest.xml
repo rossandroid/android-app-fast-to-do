@@ -22,7 +22,7 @@
         </receiver>
 
         <activity android:name=".MainActivity"
-            >
+            android:label="To do">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,6 +31,7 @@
         </activity>
         <activity android:name=".AddTodo"
             android:taskAffinity=""
+            android:label="Remember me"
             ></activity>
     </application>
 

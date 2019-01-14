@@ -31,7 +31,7 @@ public interface TodoDao {
     @Query ("DELETE FROM Todo WHERE stato=1")
     void deleteCompleted();
 
-    @Query ("DELETE FROM Todo WHERE (reminder-:timer)<=0")
+    @Query ("DELETE FROM Todo WHERE (reminder-:timer)<=0 AND stato=0")
     void deleteTimeout(long timer);
 }
 
