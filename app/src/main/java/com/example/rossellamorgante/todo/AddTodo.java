@@ -77,7 +77,7 @@ public class AddTodo extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 index_seek=progress;
-                ((TextView)findViewById(R.id.labeltime)).setText(getResources().getString(R.string.reminder_after)+timeing[progress]+getResources().getString(R.string.minutes));
+                ((TextView)findViewById(R.id.labeltime)).setText(getResources().getString(R.string.reminder_after)+" "+timeing[progress]+" "+getResources().getString(R.string.minutes));
             }
         });
 
