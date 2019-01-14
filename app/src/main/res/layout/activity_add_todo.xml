@@ -47,19 +47,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/b_categoria"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="pickCategoria"
-        android:text="@string/b_categoria"
-        app:layout_constraintEnd_toStartOf="@+id/color_label"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelCategoria" />
-
     <TextView
         android:id="@+id/labelCategoria"
         android:layout_width="0dp"
@@ -87,14 +74,14 @@
 
     <ImageView
         android:id="@+id/color_label"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/b_categoria"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/b_categoria"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelCategoria"
         app:srcCompat="@color/colorAccent" />
 
     <TextView
@@ -102,12 +89,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Remember me after 2 minutes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/b_categoria" />
+        app:layout_constraintTop_toBottomOf="@+id/color_label" />
 
     <SeekBar
         android:id="@+id/timeBar"
@@ -123,6 +110,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labeltime" />
+
+    <TextView
+        android:id="@+id/lcat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/color_label"
+        app:layout_constraintEnd_toEndOf="@+id/color_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/color_label" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

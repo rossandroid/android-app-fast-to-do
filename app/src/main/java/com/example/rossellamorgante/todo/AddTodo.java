@@ -46,17 +46,16 @@ public class AddTodo extends AppCompatActivity {
         categorie = getResources().getStringArray(R.array.array_categorie);
         colors = getResources().getStringArray(R.array.array_color_categorie);
 
-        ((Button)findViewById(R.id.b_categoria)).setText(categorie[0]);
         ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[0]));
+        ((TextView)findViewById(R.id.lcat)).setText(categorie[0]);
+
         seekBar = (SeekBar)findViewById(R.id.timeBar);
         ((TextView)findViewById(R.id.labelCategoria)).setText(getResources().getString(R.string.category));
-
 
         try{
             t= (Todo)getIntent().getSerializableExtra("todo");
             ((TextInputEditText)findViewById(R.id.t_titolo)).setText(t.titolo);
             ((TextInputEditText)findViewById(R.id.t_descrizione)).setText(t.descr);
-            ((Button)findViewById(R.id.b_categoria)).setText(t.categoria);
             ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[Arrays.asList(categorie).indexOf(t.categoria)]));
             ((Switch) findViewById(R.id.switch_c)).setChecked(t.stato);
             isNew=false;
@@ -82,6 +81,11 @@ public class AddTodo extends AppCompatActivity {
             }
         });
 
+        ((ImageView) findViewById(R.id.color_label)).setOnClickListener( new View.OnClickListener() {
+            public void onClick(View v) {
+                pickCategoria();
+            }
+        });
     }
 
 
@@ -125,7 +129,7 @@ public class AddTodo extends AppCompatActivity {
 
         t.titolo = ((TextInputEditText)findViewById(R.id.t_titolo)).getText().toString();
         t.descr = ((TextInputEditText)findViewById(R.id.t_descrizione)).getText().toString();
-        t.categoria =  ((Button)findViewById(R.id.b_categoria)).getText().toString();
+        t.categoria =  ((TextView)findViewById(R.id.lcat)).getText().toString();
         t.stato = ((Switch) findViewById(R.id.switch_c)).isChecked();
         t.data = new Date().getTime();
 
@@ -145,7 +149,7 @@ public class AddTodo extends AppCompatActivity {
 
     }
 
-    public void pickCategoria (View v){
+    public void pickCategoria (){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getResources().getString(R.string.t_pick_categoria));
@@ -154,8 +158,10 @@ public class AddTodo extends AppCompatActivity {
         builder.setItems(categorie, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ((Button)findViewById(R.id.b_categoria)).setText(categorie[which]);
+
                 ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[which]));
+                ((TextView)findViewById(R.id.lcat)).setText(categorie[which]);
+
             }
         });
 
