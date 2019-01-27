@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import static android.graphics.Color.parseColor;
 
@@ -37,6 +38,7 @@ public class AddTodo extends AppCompatActivity {
     SeekBar seekBar ;
     int index_seek=0;
     final int [] timeing={2,5,10,15,30,45,60};
+    private Toolbar mTopToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,10 @@ public class AddTodo extends AppCompatActivity {
                 pickCategoria();
             }
         });
+
+        mTopToolbar = (Toolbar) findViewById(R.id.toolbaradd);
+        mTopToolbar.setTitle("");
+        setSupportActionBar(mTopToolbar);
     }
 
 

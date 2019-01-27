@@ -63,7 +63,7 @@ public class AdapterToDoList extends ArrayAdapter<Todo> {
             ((ImageView)listItem.findViewById(R.id.comp1)).setVisibility(View.VISIBLE);
         }else {
            if(v<=0){
-               ((ImageView)listItem.findViewById(R.id.comp1)).setColorFilter(getContext().getResources().getColor(R.color.colorDarkOrange));
+               ((ImageView)listItem.findViewById(R.id.comp1)).setBackgroundResource(R.drawable.circle_timeout);//setColorFilter(getContext().getResources().getColor(R.color.colorDarkOrange));
                ((ImageView)listItem.findViewById(R.id.comp1)).setVisibility(View.VISIBLE);
            }
         }

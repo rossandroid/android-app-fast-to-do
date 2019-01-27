@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'Giovanni'
+            keyPassword 'Giovanni'
+            storeFile file('Giovanni.jks')
+            storePassword 'Giovanni'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.rossellamorgante.todo"
@@ -14,19 +22,19 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1-alpha01'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1-alpha01'
-    implementation "android.arch.persistence.room:runtime:1.0.0"
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
     implementation 'com.google.android.material:material:1.0.0'
-
 }

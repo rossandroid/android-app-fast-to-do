@@ -24,26 +24,29 @@ public class AlarmReceiver extends BroadcastReceiver {
         //TODO: Colori e Icona personalizzata
 
         int id = intent.getIntExtra("id", -1);
-        Todo t = AppDatabase.getInstance(context).todoDao().getTodo(id);
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Intent notifyIntent = new Intent(context, MainActivity.class);
-        notifyIntent.putExtra("notifity_todo", t);
+        try{
+            Todo t = AppDatabase.getInstance(context).todoDao().getTodo(id);
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent notifyPendingIntent = PendingIntent.getActivity( context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "rossella.minutesTodo")
-                .setSmallIcon(R.drawable.ic_timer_black_24dp)
-                .setContentTitle(t.titolo.toUpperCase())
-                .setContentText("["+t.categoria+"] " + t.descr)
-                .setVibrate(new long[]{0, 1000, 500, 1000})
-                .setSound(alarmSound)
-                .setContentIntent(notifyPendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        notificationManager.notify(t.id, mBuilder.build());
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Intent notifyIntent = new Intent(context, MainActivity.class);
+            notifyIntent.putExtra("notifity_todo", t);
 
+            notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent notifyPendingIntent = PendingIntent.getActivity( context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "rossella.minutesTodo")
+                    .setSmallIcon(R.drawable.ic_timer_black_24dp)
+                    .setContentTitle(t.titolo.toUpperCase())
+                    .setContentText("["+t.categoria+"] " + t.descr)
+                    .setVibrate(new long[]{0, 1000, 500, 1000})
+                    .setSound(alarmSound)
+                    .setContentIntent(notifyPendingIntent)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            notificationManager.notify(t.id, mBuilder.build());
+
+        }catch (Exception e){ }
     }
 
 

@@ -4,20 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/shape"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/comp1"
             android:layout_width="10dp"
-            android:layout_height="match_parent"
+            android:layout_height="10dp"
             android:layout_weight="0"
-            android:visibility="invisible"
-            app:srcCompat="@android:color/holo_green_light" />
+            android:background="@drawable/circle_done"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -67,22 +70,6 @@
                     android:layout_weight="1"
                     android:text="TextView" />
 
-
-                <!--<com.google.android.material.chip.Chip
-            android:id="@+id/t_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:clickable="false"
-            android:includeFontPadding="false"
-            android:linksClickable="false"
-            android:longClickable="false"
-            android:text="@string/b_categoria"
-            android:textColor="@android:color/white"
-            app:closeIconEnabled="false"
-            app:closeIconVisible="false" /> -->
-
                 <TextView
                     android:id="@+id/t_category"
                     android:layout_width="wrap_content"
@@ -113,7 +100,8 @@
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textColor="@color/d_gray_color_icon" />
 
                 <TextView
                     android:id="@+id/t_data"
@@ -125,6 +113,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_weight="0"
                     android:text="TextView"
+                    android:textColor="@color/l_gray_color_icon"
                     android:textSize="12sp"
                     android:textStyle="italic" />
             </LinearLayout>
