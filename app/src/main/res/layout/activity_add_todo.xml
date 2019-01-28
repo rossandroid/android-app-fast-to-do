@@ -74,7 +74,7 @@
         android:id="@+id/switch_c"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:text="Have you completed it?  "
         android:textColor="@color/d_gray_color_icon"
@@ -83,29 +83,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeBar" />
 
-    <ImageView
-        android:id="@+id/color_label"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelCategoria"
-        app:srcCompat="@color/colorAccent" />
-
     <TextView
         android:id="@+id/labeltime"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="19dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:text="Remember me after 2 minutes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/color_label" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <SeekBar
         android:id="@+id/timeBar"
@@ -122,19 +110,75 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labeltime" />
 
-    <TextView
-        android:id="@+id/lcat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="TextView"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/color_label"
-        app:layout_constraintEnd_toEndOf="@+id/color_label"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/color_label" />
+        app:layout_constraintTop_toBottomOf="@+id/labelCategoria">
+
+        <Button
+            android:id="@+id/one"
+            android:layout_width="87dp"
+            android:layout_height="25dp"
+            android:background="@drawable/button_badge"
+            android:backgroundTint="@color/l_gray_caaolor_icon"
+            android:onClick="switchCategory"
+            android:text="Shopping"
+            android:textColor="@android:color/white"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="510dp" />
+
+        <Button
+            android:id="@+id/two"
+            android:layout_width="87dp"
+            android:layout_height="25dp"
+            android:background="@drawable/button_badge"
+            android:backgroundTint="@color/l_gray_caaolor_icon"
+            android:onClick="switchCategory"
+            android:text="Family"
+            android:textColor="@android:color/white"
+            tools:layout_editor_absoluteX="131dp"
+            tools:layout_editor_absoluteY="436dp" />
+
+        <Button
+            android:id="@+id/three"
+            android:layout_width="87dp"
+            android:layout_height="25dp"
+            android:background="@drawable/button_badge"
+            android:backgroundTint="@color/l_gray_caaolor_icon"
+            android:onClick="switchCategory"
+            android:text="Sport"
+            android:textColor="@android:color/white"
+            tools:layout_editor_absoluteX="207dp"
+            tools:layout_editor_absoluteY="472dp" />
+
+        <Button
+            android:id="@+id/four"
+            android:layout_width="87dp"
+            android:layout_height="25dp"
+            android:background="@drawable/button_badge"
+            android:backgroundTint="@color/l_gray_caaolor_icon"
+            android:onClick="switchCategory"
+            android:text="Work"
+            android:textColor="@android:color/white"
+            tools:layout_editor_absoluteX="254dp"
+            tools:layout_editor_absoluteY="436dp" />
+    </LinearLayout>
+    "
+        tools:lay"@drawable/button_badge"
+        android:background="@drawable/rounded_textview"
+
+        d:backgroundTint="@an
+        or/holo_red_dark"
+        android:te
+        n"
+        tools:layout_editor_absolu />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,10 +9,11 @@
     </string-array>
 
     <string-array name="array_color_categorie">
-        <item>#9a0007</item>
+        <item>#cc0007</item>
         <item>#303f9f</item>
         <item>#00600f</item>
-        <item>#bb4d00</item>
+        <item>#bb4dff</item>
+        <item>#bdbdbd</item>
     </string-array>
 
 </resources>

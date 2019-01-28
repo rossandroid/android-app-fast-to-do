@@ -2,6 +2,7 @@ package com.example.rossellamorgante.todo;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -39,6 +40,9 @@ public class AddTodo extends AppCompatActivity {
     int index_seek=0;
     final int [] timeing={2,5,10,15,30,45,60};
     private Toolbar mTopToolbar;
+    String category_selected="";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +52,11 @@ public class AddTodo extends AppCompatActivity {
         categorie = getResources().getStringArray(R.array.array_categorie);
         colors = getResources().getStringArray(R.array.array_color_categorie);
 
-        ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[0]));
-        ((TextView)findViewById(R.id.lcat)).setText(categorie[0]);
+        ((Button)findViewById(R.id.one)).setText(categorie[0]);
+        ((Button)findViewById(R.id.two)).setText(categorie[1]);
+        ((Button)findViewById(R.id.three)).setText(categorie[2]);
+        ((Button)findViewById(R.id.four)).setText(categorie[3]);
+
 
         seekBar = (SeekBar)findViewById(R.id.timeBar);
         ((TextView)findViewById(R.id.labelCategoria)).setText(getResources().getString(R.string.category));
@@ -58,12 +65,18 @@ public class AddTodo extends AppCompatActivity {
             t= (Todo)getIntent().getSerializableExtra("todo");
             ((TextInputEditText)findViewById(R.id.t_titolo)).setText(t.titolo);
             ((TextInputEditText)findViewById(R.id.t_descrizione)).setText(t.descr);
-            ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[Arrays.asList(categorie).indexOf(t.categoria)]));
+
+            category_selected=t.categoria;
+            updateColorButtonCategory(category_selected.toLowerCase());
+
             ((Switch) findViewById(R.id.switch_c)).setChecked(t.stato);
             isNew=false;
         }catch (Exception e){
              t  = new Todo();
             ((Switch) findViewById(R.id.switch_c)).setVisibility(View.GONE);
+            category_selected=categorie[0];
+            updateColorButtonCategory(category_selected.toLowerCase());
+
         }
 
 
@@ -83,11 +96,6 @@ public class AddTodo extends AppCompatActivity {
             }
         });
 
-        ((ImageView) findViewById(R.id.color_label)).setOnClickListener( new View.OnClickListener() {
-            public void onClick(View v) {
-                pickCategoria();
-            }
-        });
 
         mTopToolbar = (Toolbar) findViewById(R.id.toolbaradd);
         mTopToolbar.setTitle("");
@@ -135,7 +143,7 @@ public class AddTodo extends AppCompatActivity {
 
         t.titolo = ((TextInputEditText)findViewById(R.id.t_titolo)).getText().toString();
         t.descr = ((TextInputEditText)findViewById(R.id.t_descrizione)).getText().toString();
-        t.categoria =  ((TextView)findViewById(R.id.lcat)).getText().toString();
+        t.categoria =  category_selected;
         t.stato = ((Switch) findViewById(R.id.switch_c)).isChecked();
         t.data = new Date().getTime();
 
@@ -155,23 +163,47 @@ public class AddTodo extends AppCompatActivity {
 
     }
 
-    public void pickCategoria (){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getResources().getString(R.string.t_pick_categoria));
-        categorie = getResources().getStringArray(R.array.array_categorie);
-        colors = getResources().getStringArray(R.array.array_color_categorie);
-        builder.setItems(categorie, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                ((ImageView) findViewById(R.id.color_label)).setColorFilter(parseColor(colors[which]));
-                ((TextView)findViewById(R.id.lcat)).setText(categorie[which]);
-
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    public void switchCategory(View v){
+        String rID= getResources().getResourceEntryName(v.getId());
+        category_selected=((Button) v).getText().toString();
+        updateColorButtonCategory(rID);
     }
+
+    public void updateColorButtonCategory(String rID){
+        if(rID.equals("one")||rID.equals("work") ){
+
+            ((Button)findViewById(R.id.one)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[0])));
+            ((Button)findViewById(R.id.two)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+            ((Button)findViewById(R.id.three)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+            ((Button)findViewById(R.id.four)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+
+
+        }else
+        if(rID.equals("two")||rID.equals("family")){
+
+            ((Button)findViewById(R.id.one)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+            ((Button)findViewById(R.id.two)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[1])));
+            ((Button)findViewById(R.id.three)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+            ((Button)findViewById(R.id.four)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+
+        }else
+        if(rID.equals("three")||rID.equals("shopping")){
+
+            ((Button)findViewById(R.id.one)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+            ((Button)findViewById(R.id.two)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+            ((Button)findViewById(R.id.three)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[2])));
+            ((Button)findViewById(R.id.four)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+
+        }else
+        if(rID.equals("four")||rID.equals("sport")){
+
+            ((Button)findViewById(R.id.one)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+            ((Button)findViewById(R.id.two)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+            ((Button)findViewById(R.id.three)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[4])));
+            ((Button)findViewById(R.id.four)).setBackgroundTintList(ColorStateList.valueOf(parseColor(colors[3])));
+
+        }
+    }
+
 }
