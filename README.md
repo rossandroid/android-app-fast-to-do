@@ -1,4 +1,5 @@
-# fastToDo
+# fastToDo (android navive application)
+
 The app’s main model is the class Todo. Todos are store in sqlite lite database.<br/>
 The library Room is used for managing the CRUD actions.<br/>
 This application uses a **listView** to display the todos. <br/>
